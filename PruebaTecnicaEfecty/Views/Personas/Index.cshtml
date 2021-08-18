@@ -1,0 +1,81 @@
+﻿@model IEnumerable<PruebaTecnicaEfecty.Models.Persona>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Datos</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorGanar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @{
+                    switch (item.TipoDocumento.Trim())
+                    {
+                        case "T.I":
+                            <span>Tarjeta de identidad</span>
+                            break;
+                        case "C.C":
+                            <span>Cedula de ciudadania</span>
+                            break;
+                        case "PS":
+                            <span>Pasaporte</span>
+                            break;
+                        case "C.CE":
+                            <span> Cedula de extranjeria </span>
+                            break;
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorGanar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoCivil)
+            </td>
+            <td>
+                <a class="boton_personalizado" asp-action="Edit" asp-route-id="@item.RowId" style="bo">Editar</a> |
+                <a class="boton_personalizado" asp-action="Details" asp-route-id="@item.RowId">Detalle</a> |
+                <a class="boton_personalizado_red" asp-action="Delete" asp-route-id="@item.RowId">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
